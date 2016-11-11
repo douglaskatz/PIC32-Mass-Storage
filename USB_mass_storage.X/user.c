@@ -10,6 +10,7 @@
 #include <stdint.h>          /* For uint32_t definition                       */
 #include <stdbool.h>         /* For true/false definition                     */
 #include "user.h"            /* variables/params used by user.c               */
+#include "system.h"
 
 /******************************************************************************/
 /* User Functions                                                             */
@@ -22,4 +23,11 @@ void InitApp(void)
     /* Setup analog functionality and port direction */
 
     /* Initialize peripherals */
+}
+
+void delay_ms(unsigned long i){
+    unsigned int j;
+    j = dTime_ms * i;
+    WriteCoreTimer(0);
+    while(ReadCoreTimer() < j);
 }

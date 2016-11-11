@@ -59,9 +59,14 @@ int32_t main(void)
     INTConfigureSystem(INT_SYSTEM_CONFIG_MULT_VECTOR);
 
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-
+    _TRIS_LEDGREEN = 0;
+    _TRIS_LEDRED = 0;
+    _LEDGREEN = 0;
+    _LEDRED = 1;
     while(1)
     {
-
+        delay_ms(200);
+        _LEDGREEN ^= 1;
+        _LEDRED ^= 1;
     }
 }
