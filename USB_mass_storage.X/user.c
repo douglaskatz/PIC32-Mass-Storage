@@ -31,3 +31,27 @@ void delay_ms(unsigned long i){
     WriteCoreTimer(0);
     while(ReadCoreTimer() < j);
 }
+
+int sw1_debounce(){
+    int cntr = 0;
+    while(SWITCH_1){
+        cntr++;
+        if(cntr > 200){
+            while(SWITCH_1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int sw2_debounce(){
+    int cntr = 0;
+    while(SWITCH_2){
+        cntr++;
+        if(cntr > 200){
+            while(SWITCH_2);
+            return 1;
+        }
+    }
+    return 0;
+}

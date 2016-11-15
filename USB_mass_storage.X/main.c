@@ -21,7 +21,6 @@
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
-
 int32_t main(void)
 {
 
@@ -50,13 +49,13 @@ int32_t main(void)
     while(1)
     {
         //delay_ms(200);
-        if(SWITCH_1){
+        if(sw1_debounce()){
             _LEDGREEN ^= 1;
             _LEDRED ^= 1;
             delay_ms(200);
         }
         
-        if(SWITCH_2){
+        if(sw2_debounce()){
             _LEDGREEN = 1;
             _LEDRED = 1;
             delay_ms(200);

@@ -21,3 +21,7 @@
 void InitApp(void);         /* I/O and Peripheral Initialization */
 
 void delay_ms(unsigned long i);
+
+int sw1_debounce();
+
+int sw2_debounce();
