@@ -15,6 +15,9 @@
 #define _TRIS_LEDRED TRISBbits.TRISB4
 #define _LEDRED LATBbits.LATB4
 
+#define SWITCH_1 mPORTBReadBits(BIT_7)
+#define SWITCH_2 mPORTBReadBits(BIT_13)
+
 void InitApp(void);         /* I/O and Peripheral Initialization */
 
 void delay_ms(unsigned long i);

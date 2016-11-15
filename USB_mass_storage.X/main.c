@@ -26,27 +26,8 @@ int32_t main(void)
 {
 
 #ifndef PIC32_STARTER_KIT
-    /*The JTAG is on by default on POR.  A PIC32 Starter Kit uses the JTAG, but
-    for other debug tool use, like ICD 3 and Real ICE, the JTAG should be off
-    to free up the JTAG I/O */
     DDPCONbits.JTAGEN = 0;
 #endif
-
-    /*Refer to the C32 peripheral library documentation for more
-    information on the SYTEMConfig function.
-    
-    This function sets the PB divider, the Flash Wait States, and the DRM
-    /wait states to the optimum value.  It also enables the cacheability for
-    the K0 segment.  It could has side effects of possibly alter the pre-fetch
-    buffer and cache.  It sets the RAM wait states to 0.  Other than
-    the SYS_FREQ, this takes these parameters.  The top 3 may be '|'ed
-    together:
-    
-    SYS_CFG_WAIT_STATES (configures flash wait states from system clock)
-    SYS_CFG_PB_BUS (configures the PB bus from the system clock)
-    SYS_CFG_PCACHE (configures the pCache if used)
-    SYS_CFG_ALL (configures the flash wait states, PB bus, and pCache)*/
-
     /* TODO Add user clock/system configuration code if appropriate.  */
     SYSTEMConfig(SYS_FREQ, SYS_CFG_ALL); 
 
@@ -59,14 +40,26 @@ int32_t main(void)
     INTConfigureSystem(INT_SYSTEM_CONFIG_MULT_VECTOR);
 
     /* TODO <INSERT USER APPLICATION CODE HERE> */
+    mPORTBSetPinsDigitalIn(BIT_7); //Set Switch 1 to an input
+    mPORTBSetPinsDigitalIn(BIT_13); //Set Switch 1 to an input
+    
     _TRIS_LEDGREEN = 0;
     _TRIS_LEDRED = 0;
     _LEDGREEN = 0;
     _LEDRED = 1;
     while(1)
     {
-        delay_ms(200);
-        _LEDGREEN ^= 1;
-        _LEDRED ^= 1;
+        //delay_ms(200);
+        if(SWITCH_1){
+            _LEDGREEN ^= 1;
+            _LEDRED ^= 1;
+            delay_ms(200);
+        }
+        
+        if(SWITCH_2){
+            _LEDGREEN = 1;
+            _LEDRED = 1;
+            delay_ms(200);
+        }
     }
 }
