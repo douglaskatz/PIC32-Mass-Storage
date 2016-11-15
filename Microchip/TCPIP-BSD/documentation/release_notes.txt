@@ -1,0 +1,72 @@
+***********************
+TCPIP-BSD Release Notes
+***********************
+
+1. BSD documentation available out there:
+
+    - UNIX Network Programming Volume 1, Third Edition: The Sockets Networking API, W. Richard Stevens, Bill Fenner, Andrew M. Rudoff, Addison Wesley, 2003.
+    
+    - The standard definition of the Sockets interface is contained in the POSIX standard, known as:
+        IEEE Std. 1003.1-2001 Standard for Information Technology -- Portable Operating System Interface (POSIX).
+        Information about this standard and ongoing work on it is available from the Austin website. http://www.opengroup.org/austin/
+    
+    - Unix Manual Pages
+    
+    - Beej's Guide to Network Programming http://beej.us/guide/bgnet/
+    
+    - quick TCP-IP NetIntro with C examples : http://heather.cs.ucdavis.edu/~matloff/Networks/Intro/NetIntro.pdf
+
+
+2. Limitations of our socket interface implementation.
+    The MCHP BSD TCP/IP stack is a subset of a standard, large TCP/IPstack implementation.
+    Some of the most notable limitations are:
+
+    - setsockopt(): the only options supported are TCP_NO_DELAY, SO_SNDBUF and SO_RCVBUF
+    - SO_RCVBUF is used for the socket window size advertisement. All the traffic for all the
+      sockets is stored in a gloabal heap under the control of the stack manager.     
+    - getsockopt() is not supported
+    - Other advanced options (like delayed acknowledge, congestion control, slow start, etc)
+      are not implemented.
+
+
+3. Specifics of our socket interface implementation:
+    - the MCHP BSD TCP/IP stack supports zero copy sockets.
+      While the zero copy interface is not a standard BSD one,
+      it has the advantage of providing a faster communication channel
+      for the application that uses this functionality.
+      The application has to provide acknowledge callbacks for the TX flow
+      and call an acknowledge function for the RX flow when done processing the buffer. 
+    
+
+4. Release notes:
+    The following new features have been added/modified to the current release of the MCHP BSD:
+    - Integration of the PIC32MX6 and PIC32MX7 families with the integrated Ethernet/MAC controller.
+    - The stack works now in interrupts and presents events to the user application.
+      The application has to call into the stack only when Ethernet events are pending.
+      This feature facilitates easy integration in an OS environment where different RX/TX server/client threads
+      have to be maintained.
+    - More consistent naming applied to the stack interface functions:
+        - the BSD sockets interface file has been renamed socket.h.
+        - All the proprietary stack related functions start with the TCPIP letters.
+    - The memory allocation has been improved: it is much faster and with smaller granularity.
+    - TCP Keep Alive functionality has been added for stream sockets.
+    - The stack supports now the Zero Copy functionality (much faster than the standard socket interface).
+      This feature is available only on the PIC32MX6-7 families with embedded Ethernet controller.
+    - Support for external RMII/MII connected PHY's has been added to the stack.
+      Currently we support the National DP83848 and SMSC LAN 8700 PHY's.
+      Support for other PHY's will be added in the future.
+    - PHY scan operations are supported for PHY's status. This increases the speed of the link down status detection.
+    - The TCP timer needed for the TCP state machine uses a global system timer wich is implemented
+      by the CPU core timer. The peripheral Timer1 is no longer used.
+      
+        
+
+5. Known issues:
+    - Common conversion routines (htons, htonl, and the like) still have proprietary names.
+    - SO_BROADCAST option for an UDP socket that allows sending the broadcast messages is missing.
+      To send broadcast messages the socket must set the destination address to 0xffffffff; 
+    - TCP flow control is not fully implemented (rephrase? missing some important parts).
+    - Nagle algorithn is not fully implemented (rephrase? is actually suspiciously implemented in my opinion).
+    - The hardware provided RX checksum is not used for UDP/TCP checksum calculation.
+    - The external PHY interrupts are not used.
+
