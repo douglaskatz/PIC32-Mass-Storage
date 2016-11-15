@@ -15,6 +15,9 @@
 #define _TRIS_LEDRED TRISBbits.TRISB4
 #define _LEDRED LATBbits.LATB4
 
+#define _TRIS_LEDYELLOW TRISAbits.TRISA4
+#define _LEDYELLOW LATAbits.LATA4
+
 #define SWITCH_1 mPORTBReadBits(BIT_7)
 #define SWITCH_2 mPORTBReadBits(BIT_13)
 

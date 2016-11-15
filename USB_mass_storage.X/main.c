@@ -44,20 +44,25 @@ int32_t main(void)
     
     _TRIS_LEDGREEN = 0;
     _TRIS_LEDRED = 0;
+    _TRIS_LEDYELLOW = 0;
     _LEDGREEN = 0;
     _LEDRED = 1;
+    _LEDYELLOW = 0;
+    
     while(1)
     {
         //delay_ms(200);
         if(sw1_debounce()){
             _LEDGREEN ^= 1;
             _LEDRED ^= 1;
+            _LEDYELLOW ^= 1;
             delay_ms(200);
         }
         
         if(sw2_debounce()){
             _LEDGREEN = 1;
             _LEDRED = 1;
+            _LEDYELLOW = 0;
             delay_ms(200);
         }
     }
