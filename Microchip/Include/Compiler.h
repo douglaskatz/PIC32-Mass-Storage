@@ -47,6 +47,8 @@
 #ifndef __COMPILER_H
 #define __COMPILER_H
 
+#define _SUPPRESS_PLIB_WARNING 1
+
 // Include proper device header file
 #if defined(__18CXX) || defined(HI_TECH_C)	
 	// All PIC18 processors

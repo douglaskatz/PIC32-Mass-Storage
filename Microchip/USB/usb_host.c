@@ -1415,17 +1415,24 @@ void USBHostTasks( void )
                             IPC21           |= 0x0600;
                             IEC5            |= 0x0040;
                         #elif defined( __PIC32MX__ )
+
                             // Enable the USB interrupt.
-                            IFS1CLR         = 0x02000000;
-                            IPC11CLR        = 0x0000FF00;
-                            IPC11SET        = 0x00001000;
-                            IEC1SET         = 0x02000000;
+//                            IFS1CLR         = 0x02000000;
+//                            IPC11CLR        = 0x0000FF00;
+//                            IPC11SET        = 0x00001000;
+//                            IEC1SET         = 0x02000000;
+                            
+                            // Enable the USB interrupt.
+                            IFS1CLR         = 0x000000FF; //done
+                            IPC7CLR        = 0x00FF0000; //done
+                            IPC7SET        = 0x00040000; //done
+                            IEC1SET         = 0x00000008; //done
                         #else
                             #error Cannot enable USB interrupt.
                         #endif
 
                         // Enable the ATTACH interrupt.
-                        U1IEbits.ATTACHIE = 1;
+                        U1IEbits.ATTACHIE = 1; //done
 
                         // Set the next substate.  We do this before we enable
                         // interrupts in case the interrupt changes states.
@@ -1440,8 +1447,10 @@ void USBHostTasks( void )
 
                 case SUBSTATE_WAIT_FOR_DEVICE:
                     // Wait here for the ATTACH interrupt.
+                    LATAbits.LATA4 = 1;
                     #ifdef  USB_SUPPORT_OTG
                         U1IEbits.ATTACHIE = 1;
+
                     #endif
                 break;
             }
@@ -5173,7 +5182,7 @@ BOOL _USB_TransferInProgress( void )
 #if defined(__C30__)
 void __attribute__((__interrupt__, no_auto_psv)) _USB1Interrupt( void )
 #elif defined(__PIC32MX__)
-#pragma interrupt _USB1Interrupt ipl4 vector 45
+#pragma interrupt _USB1Interrupt ipl4 vector 30 //Changed from vector #45
 void _USB1Interrupt( void )
 #else
     #error Cannot define timer interrupt vector.
@@ -5183,7 +5192,8 @@ void _USB1Interrupt( void )
     #if defined( __C30__)
         IFS5 &= 0xFFBF;
     #elif defined( __PIC32MX__)
-        IFS1CLR = 0x02000000;
+        //IFS1CLR = 0x02000000;
+         IFS1CLR         = 0x000000FF; //done
     #else
         #error Cannot clear USB interrupt.
     #endif

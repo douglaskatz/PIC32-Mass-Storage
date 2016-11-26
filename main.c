@@ -10,8 +10,10 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#ifndef OVERRIDE_CONFIG_BITS
-        
+#define _SUPPRESS_PLIB_WARNING 1
+//#define EXAMPLE 1
+
+#ifdef EXAMPLE
     #pragma config UPLLEN   = ON            // USB PLL Enabled
     #pragma config FPLLMUL  = MUL_20        // PLL Multiplier
     #pragma config UPLLIDIV = DIV_2         // USB PLL Input Divider
@@ -31,8 +33,27 @@
     #pragma config PWP      = OFF           // Program Flash Write Protect
     #pragma config ICESEL   = ICS_PGx2      // ICE/ICD Comm Channel Select
     #pragma config DEBUG    = OFF           // Debugger Disabled for Starter Kit
-            
-#endif // OVERRIDE_CONFIG_BITS
+#else
+    #pragma config UPLLEN   = ON            // USB PLL Enabled
+    #pragma config FPLLMUL  = MUL_20        // PLL Multiplier
+    #pragma config UPLLIDIV = DIV_2         // USB PLL Input Divider
+    #pragma config FPLLIDIV = DIV_2         // PLL Input Divider
+    #pragma config FPLLODIV = DIV_2         // PLL Output Divider
+    #pragma config FPBDIV   = DIV_1         // Peripheral Clock divisor
+    #pragma config FWDTEN   = OFF           // Watchdog Timer 
+    #pragma config WDTPS    = PS1           // Watchdog Timer Postscale
+    #pragma config FCKSM    = CSDCMD        // Clock Switching & Fail Safe Clock Monitor
+    #pragma config OSCIOFNC = OFF           // CLKO Enable
+    #pragma config POSCMOD  = HS           // Primary Oscillator HS = high speed crystal (If using Primary OSC turn to HS)
+    #pragma config IESO     = OFF           // Internal/External Switch-over
+    #pragma config FSOSCEN  = OFF           // Secondary Oscillator Enable
+    #pragma config FNOSC    = PRIPLL        // Oscillator Selection
+    #pragma config CP       = OFF           // Code Protect
+    #pragma config BWP      = OFF           // Boot Flash Write Protect
+    #pragma config PWP      = OFF           // Program Flash Write Protect
+    #pragma config ICESEL   = ICS_PGx1      // ICE/ICD Comm Channel Select
+    #pragma config DEBUG    = OFF           // Debugger Disabled for Starter Kit
+#endif
 
 
 
@@ -41,14 +62,27 @@ BYTE myData[512];
 size_t numBytes;
 volatile BOOL deviceAttached;
 
-#define _TRIS_LED1 TRISDbits.TRISD0
-#define _LED1 LATDbits.LATD0
+/* TODO User level functions prototypes (i.e. InitApp) go here */
+#define _TRIS_LEDGREEN TRISAbits.TRISA0
+#define _LEDGREEN LATAbits.LATA0
+
+#define _TRIS_LEDRED TRISBbits.TRISB4
+#define _LEDRED LATBbits.LATB4
+
+#define _TRIS_LEDYELLOW TRISAbits.TRISA4
+#define _LEDYELLOW LATAbits.LATA4
 
 int main(void)
 {
+    _TRIS_LEDGREEN = 0;
+    RCON = 0x00000000;
+    _TRIS_LEDRED = 0;
+    _TRIS_LEDYELLOW = 0;
+    _LEDGREEN = 0;
+    _LEDRED = 0;
+    _LEDYELLOW = 0;
+    
     int  value;
-    _TRIS_LED1 = 0;
-    _LED1 = 0;
     value = SYSTEMConfigWaitStatesAndPB( GetSystemClock() );
 
     // Enable the cache for the best performance
@@ -56,11 +90,11 @@ int main(void)
 
     INTEnableSystemMultiVectoredInt();
 
-    value = OSCCON;
-    while (!(value & 0x00000020))
-    {
-        value = OSCCON;    // Wait for PLL lock to stabilize
-    }
+//    value = OSCCON;
+//    while (!(value & 0x00000020))
+//    {
+//        value = OSCCON;    // Wait for PLL lock to stabilize
+//    }
 
     deviceAttached = FALSE;
 
@@ -70,12 +104,15 @@ int main(void)
     while(1)
     {
         //USB stack process function
-        USBTasks();
 
+        USBTasks();
+        _LEDRED = 1;
+        _LEDGREEN = 1;
         //if thumbdrive is plugged in
         if(USBHostMSDSCSIMediaDetect())
         {
             deviceAttached = TRUE;
+            _LEDYELLOW = 1;
 
             //now a device is attached
             //See if the device is attached and in the right format
@@ -93,8 +130,8 @@ int main(void)
                 //Always make sure to close the file so that the data gets
                 //  written to the drive.
                 FSfclose(myFile);
-                _LED1 = 1;
 
+                _LEDGREEN = 1;
                 //Just sit here until the device is removed.
                 while(deviceAttached == TRUE)
                 {
@@ -102,7 +139,6 @@ int main(void)
                 }
             }
         }
-        _LED1 = 0;
     }
     return 0;
 }

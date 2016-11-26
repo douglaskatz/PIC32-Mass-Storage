@@ -520,7 +520,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>C32</languageToolchain>
-        <languageToolchainVersion>2.02</languageToolchainVersion>
+        <languageToolchainVersion>1.10</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -818,7 +818,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>C32</languageToolchain>
-        <languageToolchainVersion>2.02</languageToolchainVersion>
+        <languageToolchainVersion>1.10</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -1116,7 +1116,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>C32</languageToolchain>
-        <languageToolchainVersion>2.02</languageToolchainVersion>
+        <languageToolchainVersion>1.10</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>

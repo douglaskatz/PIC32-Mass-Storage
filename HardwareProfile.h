@@ -3,6 +3,8 @@
 #ifndef _HARDWARE_PROFILE_H_
 #define _HARDWARE_PROFILE_H_
 
+#define _SUPPRESS_PLIB_WARNING 1
+
 // Clock Definitions
 #ifndef SYS_CLOCK
     #error "Define SYS_CLOCK (ex. -DSYS_CLOCK=80000000) on compiler command line"
