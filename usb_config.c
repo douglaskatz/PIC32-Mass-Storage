@@ -31,7 +31,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "GenericTypeDefs.h"
 #include "HardwareProfile.h"
-#include "USB\usb.h"
+#include "HardwareProfile.h"
+#include "../Include/USB/usb.h"
 #include "USB\usb_host_msd.h"
 #include "USB\usb_host_msd_scsi.h"
 

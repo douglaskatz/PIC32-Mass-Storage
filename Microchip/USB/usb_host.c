@@ -55,12 +55,11 @@ KO/BC       15-Oct-2007 First release
 #include <stdlib.h>
 #include <string.h>
 #include "GenericTypeDefs.h"
-#include "USB\usb.h"
+#include "../Include/USB/usb.h"
 #include "usb_host_local.h"
 #include "usb_hal_local.h"
-#include "HardwareProfile.h"
-#include "USB\usb_hal.h"
-
+#include "../../HardwareProfile.h"
+#include "../Include/USB/usb_hal.h"
 #if defined( USB_ENABLE_TRANSFER_EVENT )
     #include "struct_queue.h"
 #endif
@@ -1447,7 +1446,6 @@ void USBHostTasks( void )
 
                 case SUBSTATE_WAIT_FOR_DEVICE:
                     // Wait here for the ATTACH interrupt.
-                    LATAbits.LATA4 = 1;
                     #ifdef  USB_SUPPORT_OTG
                         U1IEbits.ATTACHIE = 1;
 

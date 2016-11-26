@@ -37,7 +37,7 @@
 *
 *****************************************************************************/
 
-#include "Compiler.h"
+#include "../Include/Compiler.h"
 #include "MDD File System\FSIO.h"
 #include "GenericTypeDefs.h"
 #include "string.h"

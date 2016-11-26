@@ -1,7 +1,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-
+#define _SUPPRESS_PLIB_WARNING 1
 #ifdef __XC32
     #include <xc.h>          /* Defines special funciton registers, CP0 regs  */
 #endif

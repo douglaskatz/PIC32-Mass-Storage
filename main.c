@@ -106,13 +106,15 @@ int main(void)
         //USB stack process function
 
         USBTasks();
-        _LEDRED = 1;
-        _LEDGREEN = 1;
+        _LEDRED = 0;
+        _LEDGREEN = 0;
+        _LEDYELLOW = 1;
         //if thumbdrive is plugged in
         if(USBHostMSDSCSIMediaDetect())
         {
             deviceAttached = TRUE;
-            _LEDYELLOW = 1;
+            _LEDRED = 1;
+            _LEDGREEN = 0;
 
             //now a device is attached
             //See if the device is attached and in the right format
@@ -124,21 +126,25 @@ int main(void)
                 myFile = FSfopen("test.txt","w");
 
                 //Write some data to the new file.
-                FSfwrite("This is a lest.",1,15,myFile);
+                FSfwrite("This is a best.",1,15,myFile);
                 
 
                 //Always make sure to close the file so that the data gets
                 //  written to the drive.
                 FSfclose(myFile);
 
-                _LEDGREEN = 1;
+                
                 //Just sit here until the device is removed.
                 while(deviceAttached == TRUE)
                 {
                     USBTasks();
+                    _LEDRED = 0;
+                    _LEDGREEN = 1;
                 }
             }
         }
+        _LEDRED = 0;
+        _LEDGREEN = 0;
     }
     return 0;
 }

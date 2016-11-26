@@ -4,8 +4,28 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="MDD File System" projectFiles="true">
+        <itemPath>../Microchip/Include/MDD File System/FSIO.h</itemPath>
+        <itemPath>../Microchip/Include/MDD File System/FSDefs.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="USB" projectFiles="true">
+        <itemPath>../Microchip/Include/USB/usb.h</itemPath>
+        <itemPath>../Microchip/Include/USB/usb_ch9.h</itemPath>
+        <itemPath>../Microchip/Include/USB/usb_common.h</itemPath>
+        <itemPath>../Microchip/Include/USB/usb_hal.h</itemPath>
+        <itemPath>../Microchip/Include/USB/usb_hal_pic32.h</itemPath>
+        <itemPath>../Microchip/Include/USB/usb_host.h</itemPath>
+        <itemPath>../Microchip/Include/USB/usb_host_msd.h</itemPath>
+        <itemPath>../Microchip/Include/USB/usb_host_msd_scsi.h</itemPath>
+        <itemPath>../Microchip/USB/usb_hal_local.h</itemPath>
+        <itemPath>../Microchip/USB/usb_host_local.h</itemPath>
+      </logicalFolder>
       <itemPath>system.h</itemPath>
       <itemPath>user.h</itemPath>
+      <itemPath>../Microchip/Include/Compiler.h</itemPath>
+      <itemPath>../FSconfig.h</itemPath>
+      <itemPath>../usb_config.h</itemPath>
+      <itemPath>../HardwareProfile.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -14,12 +34,21 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="MDD File System" projectFiles="true">
+        <itemPath>../Microchip/MDD File System/FSIO.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="USB" projectFiles="true">
+        <itemPath>../Microchip/USB/usb_host.c</itemPath>
+        <itemPath>../Microchip/USB/MSD Host Driver/usb_host_msd.c</itemPath>
+        <itemPath>../Microchip/USB/MSD Host Driver/usb_host_msd_scsi.c</itemPath>
+      </logicalFolder>
       <itemPath>configuration_bits.c</itemPath>
       <itemPath>exceptions.c</itemPath>
       <itemPath>interrupts.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>system.c</itemPath>
       <itemPath>user.c</itemPath>
+      <itemPath>../usb_config.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -30,6 +59,9 @@
     <itemPath>legal_disclaimer.txt</itemPath>
     <itemPath>project_information.txt</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>..</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="C32_PIC32MX795F512L" type="2">

@@ -72,10 +72,11 @@ KO          15-Oct-2007 First release
 
 #include <stdlib.h>
 #include <string.h>
+
 #include "GenericTypeDefs.h"
 #include "HardwareProfile.h"
-#include "USB\usb.h"
-#include "USB\usb_host_msd.h"
+#include "Include/USB/usb.h"
+#include "Include/USB/usb_host_msd.h"
 
 //#define DEBUG_MODE
 #ifdef DEBUG_MODE

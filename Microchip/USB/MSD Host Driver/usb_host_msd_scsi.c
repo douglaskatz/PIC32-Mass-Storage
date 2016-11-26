@@ -49,11 +49,11 @@ Author          Date    Comments
 KO          15-Oct-2007 First release
 
 *******************************************************************************/
-
+#include "HardwareProfile.h"
 #include <stdlib.h>
 #include <string.h>
 #include "GenericTypeDefs.h"
-#include "HardwareProfile.h"
+
 #include "FSconfig.h"
 #include "MDD File System\FSDefs.h"
 #include "MDD File System\FSIO.h"

@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=configuration_bits.c exceptions.c interrupts.c main.c system.c user.c
+SOURCEFILES_QUOTED_IF_SPACED=configuration_bits.c exceptions.c interrupts.c main.c system.c user.c ../usb_config.c ../Microchip/USB/usb_host.c "../Microchip/USB/MSD Host Driver/usb_host_msd.c" "../Microchip/USB/MSD Host Driver/usb_host_msd_scsi.c" "../Microchip/MDD File System/FSIO.c"
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/exceptions.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system.o ${OBJECTDIR}/user.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/configuration_bits.o.d ${OBJECTDIR}/exceptions.o.d ${OBJECTDIR}/interrupts.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/user.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/exceptions.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system.o ${OBJECTDIR}/user.o ${OBJECTDIR}/_ext/1472/usb_config.o ${OBJECTDIR}/_ext/343710134/usb_host.o ${OBJECTDIR}/_ext/131683717/usb_host_msd.o ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o ${OBJECTDIR}/_ext/2054364014/FSIO.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/configuration_bits.o.d ${OBJECTDIR}/exceptions.o.d ${OBJECTDIR}/interrupts.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/user.o.d ${OBJECTDIR}/_ext/1472/usb_config.o.d ${OBJECTDIR}/_ext/343710134/usb_host.o.d ${OBJECTDIR}/_ext/131683717/usb_host_msd.o.d ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o.d ${OBJECTDIR}/_ext/2054364014/FSIO.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/exceptions.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system.o ${OBJECTDIR}/user.o
+OBJECTFILES=${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/exceptions.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system.o ${OBJECTDIR}/user.o ${OBJECTDIR}/_ext/1472/usb_config.o ${OBJECTDIR}/_ext/343710134/usb_host.o ${OBJECTDIR}/_ext/131683717/usb_host_msd.o ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o ${OBJECTDIR}/_ext/2054364014/FSIO.o
 
 # Source Files
-SOURCEFILES=configuration_bits.c exceptions.c interrupts.c main.c system.c user.c
+SOURCEFILES=configuration_bits.c exceptions.c interrupts.c main.c system.c user.c ../usb_config.c ../Microchip/USB/usb_host.c ../Microchip/USB/MSD Host Driver/usb_host_msd.c ../Microchip/USB/MSD Host Driver/usb_host_msd_scsi.c ../Microchip/MDD File System/FSIO.c
 
 
 CFLAGS=
@@ -130,6 +130,36 @@ ${OBJECTDIR}/user.o: user.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/user.o 
 	@${FIXDEPS} "${OBJECTDIR}/user.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/user.o.d" -o ${OBJECTDIR}/user.o user.c   
 	
+${OBJECTDIR}/_ext/1472/usb_config.o: ../usb_config.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
+	@${RM} ${OBJECTDIR}/_ext/1472/usb_config.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1472/usb_config.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/usb_config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/usb_config.o.d" -o ${OBJECTDIR}/_ext/1472/usb_config.o ../usb_config.c   
+	
+${OBJECTDIR}/_ext/343710134/usb_host.o: ../Microchip/USB/usb_host.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/343710134" 
+	@${RM} ${OBJECTDIR}/_ext/343710134/usb_host.o.d 
+	@${RM} ${OBJECTDIR}/_ext/343710134/usb_host.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/343710134/usb_host.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/343710134/usb_host.o.d" -o ${OBJECTDIR}/_ext/343710134/usb_host.o ../Microchip/USB/usb_host.c   
+	
+${OBJECTDIR}/_ext/131683717/usb_host_msd.o: ../Microchip/USB/MSD\ Host\ Driver/usb_host_msd.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/131683717" 
+	@${RM} ${OBJECTDIR}/_ext/131683717/usb_host_msd.o.d 
+	@${RM} ${OBJECTDIR}/_ext/131683717/usb_host_msd.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/131683717/usb_host_msd.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/131683717/usb_host_msd.o.d" -o ${OBJECTDIR}/_ext/131683717/usb_host_msd.o "../Microchip/USB/MSD Host Driver/usb_host_msd.c"   
+	
+${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o: ../Microchip/USB/MSD\ Host\ Driver/usb_host_msd_scsi.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/131683717" 
+	@${RM} ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o.d 
+	@${RM} ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o.d" -o ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o "../Microchip/USB/MSD Host Driver/usb_host_msd_scsi.c"   
+	
+${OBJECTDIR}/_ext/2054364014/FSIO.o: ../Microchip/MDD\ File\ System/FSIO.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/2054364014" 
+	@${RM} ${OBJECTDIR}/_ext/2054364014/FSIO.o.d 
+	@${RM} ${OBJECTDIR}/_ext/2054364014/FSIO.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/2054364014/FSIO.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/2054364014/FSIO.o.d" -o ${OBJECTDIR}/_ext/2054364014/FSIO.o "../Microchip/MDD File System/FSIO.c"   
+	
 else
 ${OBJECTDIR}/configuration_bits.o: configuration_bits.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -166,6 +196,36 @@ ${OBJECTDIR}/user.o: user.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/user.o.d 
 	@${RM} ${OBJECTDIR}/user.o 
 	@${FIXDEPS} "${OBJECTDIR}/user.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/user.o.d" -o ${OBJECTDIR}/user.o user.c   
+	
+${OBJECTDIR}/_ext/1472/usb_config.o: ../usb_config.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
+	@${RM} ${OBJECTDIR}/_ext/1472/usb_config.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1472/usb_config.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/usb_config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/usb_config.o.d" -o ${OBJECTDIR}/_ext/1472/usb_config.o ../usb_config.c   
+	
+${OBJECTDIR}/_ext/343710134/usb_host.o: ../Microchip/USB/usb_host.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/343710134" 
+	@${RM} ${OBJECTDIR}/_ext/343710134/usb_host.o.d 
+	@${RM} ${OBJECTDIR}/_ext/343710134/usb_host.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/343710134/usb_host.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/343710134/usb_host.o.d" -o ${OBJECTDIR}/_ext/343710134/usb_host.o ../Microchip/USB/usb_host.c   
+	
+${OBJECTDIR}/_ext/131683717/usb_host_msd.o: ../Microchip/USB/MSD\ Host\ Driver/usb_host_msd.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/131683717" 
+	@${RM} ${OBJECTDIR}/_ext/131683717/usb_host_msd.o.d 
+	@${RM} ${OBJECTDIR}/_ext/131683717/usb_host_msd.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/131683717/usb_host_msd.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/131683717/usb_host_msd.o.d" -o ${OBJECTDIR}/_ext/131683717/usb_host_msd.o "../Microchip/USB/MSD Host Driver/usb_host_msd.c"   
+	
+${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o: ../Microchip/USB/MSD\ Host\ Driver/usb_host_msd_scsi.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/131683717" 
+	@${RM} ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o.d 
+	@${RM} ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o.d" -o ${OBJECTDIR}/_ext/131683717/usb_host_msd_scsi.o "../Microchip/USB/MSD Host Driver/usb_host_msd_scsi.c"   
+	
+${OBJECTDIR}/_ext/2054364014/FSIO.o: ../Microchip/MDD\ File\ System/FSIO.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/2054364014" 
+	@${RM} ${OBJECTDIR}/_ext/2054364014/FSIO.o.d 
+	@${RM} ${OBJECTDIR}/_ext/2054364014/FSIO.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/2054364014/FSIO.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/2054364014/FSIO.o.d" -o ${OBJECTDIR}/_ext/2054364014/FSIO.o "../Microchip/MDD File System/FSIO.c"   
 	
 endif
 
