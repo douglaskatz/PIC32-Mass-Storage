@@ -2,6 +2,8 @@
 #include "USB/usb_host_msd.h"
 #include "USB/usb_host_msd_scsi.h"
 #include "MDD File System/FSIO.h"
+#include <stdio.h>
+#include <plib.h>
 
 
 // *****************************************************************************
@@ -79,6 +81,7 @@ volatile BOOL deviceAttached;
 
 int main(void)
 {
+    __XC_UART = 2;
     _TRIS_LEDGREEN = 0;
     RCON = 0x00000000;
     _TRIS_LEDRED = 0;
@@ -94,6 +97,20 @@ int main(void)
     CheKseg0CacheOn();
 
     INTEnableSystemMultiVectoredInt();
+    
+    //UART STUFF
+    // specify PPS group, signal, logical pin name
+    PPSInput (2, U2RX, RPB8); //Assign U2RX to pin RPB11 -- Physical pin 22 on 28 PDIP
+    PPSOutput(4, RPB14, U2TX); //Assign U2TX to pin RPB10 -- Physical pin 21 on 28 PDIP
+    
+    ANSELA =0; //make sure analog is cleared
+    ANSELB =0;
+    
+   // init the uart2
+    UARTConfigure(UART2, UART_ENABLE_PINS_TX_RX_ONLY);
+    UARTSetLineControl(UART2, UART_DATA_SIZE_8_BITS | UART_PARITY_NONE | UART_STOP_BITS_1);
+    UARTSetDataRate(UART2, PBCLK, 9600);
+    UARTEnable(UART2, UART_ENABLE_FLAGS(UART_PERIPHERAL | UART_RX | UART_TX));
 
 //    value = OSCCON;
 //    while (!(value & 0x00000020))
@@ -105,15 +122,17 @@ int main(void)
 
     //Initialize the stack
     USBInitialize(0);
-    
+    _LEDYELLOW = 1;
+    printf("Standby...\n\r");
     while(1)
     {
+        printf("Standby...\n\r");
         //USB stack process function
 
         USBTasks();
         _LEDRED = 0;
         _LEDGREEN = 0;
-        _LEDYELLOW = 1;
+        
         //if thumbdrive is plugged in
         if(USBHostMSDSCSIMediaDetect())
         {
@@ -125,20 +144,36 @@ int main(void)
             //See if the device is attached and in the right format
             if(FSInit())
             {
+                printf("Writing...\n\r");
                 //Opening a file in mode "w" will create the file if it doesn't
                 //  exist.  If the file does exist it will delete the old file
                 //  and create a new one that is blank.
-                myFile = FSfopen("test.txt","w");
+                myFile = FSfopen("meme.txt","r");
 
                 //Write some data to the new file.
-                FSfwrite("This is a kest.",1,15,myFile);
-                
-
+                //FSfwrite("This is a meme.",1,15,myFile);
+                char buffer[5];
+                char string = {'A','B','C','D','E'};
+                //FSfseek( myFile, 2, SEEK_SET);
+                FSfread(buffer, 1, 5, myFile);
+                if(strcmp(buffer, "ABCDE") == 0){
+                    _LEDYELLOW = 0;
+                }
+                printf(buffer);
+                printf("\n\r");
+//                int k;
+//                for(k = 0; k < 5; k++){
+//                    if(buffer[i] == string[i]){
+//                        
+//                    }
+//                }
+//                
                 //Always make sure to close the file so that the data gets
                 //  written to the drive.
                 FSfclose(myFile);
-
-                
+                myFile = FSfopen("meme.txt","w");
+                FSfwrite("Dank",1,5,myFile);
+                FSfclose(myFile);
                 //Just sit here until the device is removed.
                 while(deviceAttached == TRUE)
                 {
