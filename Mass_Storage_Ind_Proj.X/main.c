@@ -126,7 +126,6 @@ int main(void)
     printf("Standby...\n\r");
     while(1)
     {
-        printf("Standby...\n\r");
         //USB stack process function
 
         USBTasks();
@@ -152,28 +151,33 @@ int main(void)
 
                 //Write some data to the new file.
                 //FSfwrite("This is a meme.",1,15,myFile);
-                char buffer[5];
-                char string = {'A','B','C','D','E'};
-                //FSfseek( myFile, 2, SEEK_SET);
-                FSfread(buffer, 1, 5, myFile);
-                if(strcmp(buffer, "ABCDE") == 0){
-                    _LEDYELLOW = 0;
+                char temp;
+                char buffer[1800];
+                int i;
+                for(i=0;i<1800;i++){
+                    buffer[i]=0;
                 }
+                int readResult = 1000;
+                //FSfseek( myFile, 2, SEEK_SET);
+                int cnt = 0;
+                //FSfread returns 0 at eof
+                readResult = FSfeof(myFile);
+                while(!(FSfread(&temp, 1, 1, myFile)==0) && cnt < 1800){
+                    buffer[cnt] = temp;
+                    cnt++;
+                }
+                printf("postloop");
+                printf("\n\r");
+                
+                readResult = FSfread(&temp, 1, 1, myFile);
+                printf("%d", readResult);
+                printf("\n\r");
                 printf(buffer);
                 printf("\n\r");
-//                int k;
-//                for(k = 0; k < 5; k++){
-//                    if(buffer[i] == string[i]){
-//                        
-//                    }
-//                }
-//                
                 //Always make sure to close the file so that the data gets
                 //  written to the drive.
                 FSfclose(myFile);
-                myFile = FSfopen("meme.txt","w");
-                FSfwrite("Dank",1,5,myFile);
-                FSfclose(myFile);
+
                 //Just sit here until the device is removed.
                 while(deviceAttached == TRUE)
                 {
