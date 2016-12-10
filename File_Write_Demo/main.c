@@ -7,20 +7,12 @@
 
 //------------------------------------------------------------------------------
 /* 
- * File_Read_Demo.X
- * This project will idle until a flash drive is inserted into the device. When
- * a Flash drive is inserted the red LED will turn on to indicate that the PIC
- * has noticed this. The PIC will then read the contents of the file into a 
- * buffer. This buffer will then output through UART where the file can be
- * displayed in Putty. Once this is finished the red LED will turn off and the 
- * green LED will turn on to signal that read is finished and the flash drive 
- * can be removed safely. The program will read again if the flash drive is 
- * reinserted.
+ * File_Write_Demo
+ * This program writes a string to a file. The program will write to a file 
+ * specified by a file name. If a file by that name does not exist the file will
+ * be created and then written to.
  */
 //------------------------------------------------------------------------------
-
-// Enter the name of the file to be read here (Case does not matter)
-#define FileName "File.txt"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -123,30 +115,22 @@ int main(void)
             //See if the device is attached and in the right format
             if(FSInit())
             {
-                printf("Reading...\n\r");
-                //Opening a file in mode "r" will read the file
-                myFile = FSfopen(FileName,"r");
-
-                // Create a buffer and temp character to hold data from the file
-                char temp;
-                char buffer[1800];
-                // Clear the buffer
-                int i;
-                for(i=0;i<1800;i++){
-                    buffer[i]=0;
-                }
-                int cnt = 0;
-                // FSfread returns 0 at eof and stores one character at a time in temp
-                // Loop will end at end of file or after buffer is full
-                while(!(FSfread(&temp, 1, 1, myFile)==0) && cnt < 1800){
-                    buffer[cnt] = temp;
-                    cnt++;
-                }
-                // Print the file after reading is done or buffer is full
-                printf(buffer);
+                printf("Writing...\n\r");
+                // Open file or create file if none exists in write mode ("w")
+                // NOTE: File names must be less than eight characters before the radix
+                // NOTE: Extension must also be less than three characters
+                myFile = FSfopen("write.txt","w");
+                
+                size_t stringLength = strlen("ECE 4750 blah");
+                
+                // Write the string to the file "myFile"
+                FSfwrite("ECE 4750 blah", 1, stringLength, myFile );
+                
+                // Signal when the write has finished
+                printf("Finished Writing");
                 printf("\n\r");
-                //Always make sure to close the file so that the data gets
-                //  written to the drive.
+                // Always make sure to close the file so that the data gets
+                // written to the drive.
                 FSfclose(myFile);
 
                 //Just sit here until the device is removed.
