@@ -7,9 +7,12 @@
 
 //------------------------------------------------------------------------------
 /* 
- * File_CSV_Write
- * This program creates a CSV file by writing data to a file in a specific format.
- * It involves writing a flash drive multiple times in after connecting it.
+ * File_Seek_Demo
+ * This program modifies an existing file by changing characters 20-25 to be
+ * PIC32. This demonstrates the seek funciton of the library which allows the
+ * file pointer position to be moved in order to write to the middle of a file. 
+ * To use this demo create a file called "seek.txt" which contains at least 25 
+ * characters.
  */
 //------------------------------------------------------------------------------
 
@@ -59,8 +62,6 @@ volatile BOOL deviceAttached;
 #define _TRIS_LEDYELLOW TRISAbits.TRISA4
 #define _LEDYELLOW LATAbits.LATA4
 
-void csvRow(const char *, const char *, const char *, const char *, const char *, FSFILE *);
-
 int main(void)
 {
     // Set up LEDs
@@ -70,6 +71,7 @@ int main(void)
     _LEDGREEN = 0;
     _LEDRED = 0;
     _LEDYELLOW = 0;
+    
     
     int  value;
     value = SYSTEMConfigWaitStatesAndPB( GetSystemClock() );
@@ -90,9 +92,8 @@ int main(void)
     UARTSetDataRate(UART2, PBCLK, 9600);
     UARTEnable(UART2, UART_ENABLE_FLAGS(UART_PERIPHERAL | UART_RX | UART_TX));
 
-    
     deviceAttached = FALSE;
-    
+
     //Initialize the stack
     USBInitialize(0);
     _LEDYELLOW = 1;
@@ -117,18 +118,21 @@ int main(void)
             if(FSInit())
             {
                 printf("Writing...\n\r");
-                // Open file or create file if none exists in write mode ("w")
+                // Open file or create file in append mode ("a") this is done
+                // instead of write mode so that the file is not overwritten
                 // NOTE: File names must be less than eight characters before the radix
                 // NOTE: Extension must also be less than three characters
-                myFile = FSfopen("OW.csv","w");
+                myFile = FSfopen("seek.txt","a");
                 
-                // Writes the file in a CSV format
-                csvRow("Hero",     "DPS", "Health", "Armor", "Shield", myFile);
-                csvRow("Reinhardt", "75",    "100",   "400",      "0", myFile);
-                csvRow("Ana",       "80",    "200",     "0",      "0", myFile);
-                csvRow("McCree", "20-70",    "200",     "0",      "0", myFile);
-                csvRow("Mei",       "45",    "250",     "0",      "0", myFile); 
-                csvRow("Symmetra", "120",    "100",     "0",    "100", myFile); 
+                size_t stringLength = strlen("PIC32");
+                
+                // Move the file pointer 20 bytes from the beginning of the file
+                // SEEK_SET means we move from the beginning of the file and not
+                // from the current position or end
+                FSfseek(myFile, 20, SEEK_SET);
+                
+                // Write the string to the file "myFile"
+                FSfwrite("PIC32", 1, stringLength, myFile );
                 
                 // Signal when the write has finished
                 printf("Finished Writing");
@@ -152,22 +156,6 @@ int main(void)
     return 0;
 }
 
-// Write a file in CSV format
-void csvRow(const char * col0, const char * col1, const char * col2, const char * col3, const char * col4, FSFILE *myFile){
-    // Write the data that goes in the first column
-    FSfwrite(col0,1,strlen(col0),myFile);
-    // Separate data with commas
-    FSfwrite(",",1,1,myFile);
-    FSfwrite(col1,1,strlen(col1),myFile);
-    FSfwrite(",",1,1,myFile);
-    FSfwrite(col2,1,strlen(col2),myFile);
-    FSfwrite(",",1,1,myFile);
-    FSfwrite(col3,1,strlen(col3),myFile);
-    FSfwrite(",",1,1,myFile);
-    FSfwrite(col4,1,strlen(col4),myFile);
-    // End each row with a newline
-    FSfwrite("\n",1,1,myFile);
-}
 
 /****************************************************************************
   Function:

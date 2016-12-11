@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/default/production/File_CSV_Write.production.elf">                 
+  <executable name="dist/default/production/File_Seek_Demo.X.production.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>132240</length>                 
-      <used>103268</used>                     
-      <free>28972</free>                     
+      <used>102480</used>                     
+      <free>29760</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 
