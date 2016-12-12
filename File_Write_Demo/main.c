@@ -70,10 +70,6 @@ int main(void)
     _LEDRED = 0;
     _LEDYELLOW = 0;
     
-    
-    int  value;
-    value = SYSTEMConfigWaitStatesAndPB( GetSystemClock() );
-
     // Enable the cache for the best performance
     CheKseg0CacheOn();
 
