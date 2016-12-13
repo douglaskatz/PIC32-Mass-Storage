@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/default/production/File_Write_Demo.production.elf">                 
+  <executable name="dist/default/production/USB_MSD_Base.production.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>132240</length>                 
-      <used>101996</used>                     
-      <free>30244</free>                     
+      <used>96700</used>                     
+      <free>35540</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 
       <length>32768</length>                 
-      <used>2428</used>                     
-      <free>30340</free>                     
+      <used>2184</used>                     
+      <free>30584</free>                     
     </memory>                              
   </executable>                            
 </project>                                 
